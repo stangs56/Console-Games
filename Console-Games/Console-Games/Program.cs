@@ -10,8 +10,10 @@ namespace Console_Games
     {
         static void Main(string[] args)
         {
-            TicTacToePlayer p1 = new HumanTicTacToePlayer(), p2 = new AITicTacToePlayer();
-            TicTacToe game = new TicTacToe(null, p2);
+            TicTacToePlayer p1 = new HumanTicTacToePlayer(), p2 = new HumanTicTacToePlayer();
+            TicTacToe game = new TicTacToe(p1, p2, 5);
+            game.playGames();
+            Console.ReadLine();
         }
     }
 }

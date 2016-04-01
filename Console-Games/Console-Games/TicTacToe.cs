@@ -9,7 +9,7 @@ namespace Console_Games
 {
     class TicTacToe
     {
-        private const char empty = ' ';
+        private const char empty = ' ', p1Piece = 'X', p2Piece = 'O';
 
         private TicTacToePlayer player1, player2;
         private char[,] board;
@@ -21,19 +21,7 @@ namespace Console_Games
             get;
         }
 
-        public int player1wins
-        {
-            private set;
-            get;
-        }
-
-        public int player2wins
-        {
-            private set;
-            get;
-        }
-
-        public TicTacToe(TicTacToePlayer player1, TicTacToePlayer player2, int size)
+        public TicTacToe(TicTacToePlayer player1, TicTacToePlayer player2, int size = 3)
         {
             if (player1 == null)
                 throw new ArgumentNullException("Player1 can't be null");
@@ -44,7 +32,9 @@ namespace Console_Games
                 throw new ArgumentOutOfRangeException("size should be greater than 0");
 
             this.player1 = player1;
+            this.player1.game = this;
             this.player2 = player2;
+            this.player2.game = this;
             this.size = size;
             this.board = new char[size, size];
 
@@ -77,10 +67,21 @@ namespace Console_Games
         /// </summary>
         public void printBoard()
         {
-            //this whole thing could be a lot better
-            for(int x = 0; x < this.size; x++)
+            //maybe move to player class???
+            //or human player class???
+
+            for(int i = 0; i < this.size; i++)
             {
-                for(int y = 0; y < this.size; y++)
+                Console.Write(" {0}", i + 1);
+            }
+            Console.WriteLine();
+
+            //this whole thing could be a lot better
+            for(int y = 0; y < this.size; y++)
+            {
+                Console.Write(y + 1);
+
+                for(int x = 0; x < this.size; x++)
                 {
                     Console.Write(this.board[x, y]);
                     Console.Write('|');
@@ -88,7 +89,8 @@ namespace Console_Games
 
                 Console.WriteLine();
 
-                for(int i = 0; i < this.size; i++)
+                Console.Write(" ");
+                for(int i = 0; i < 2*this.size; i++)
                 {
                     Console.Write('-');
                 }
@@ -99,20 +101,49 @@ namespace Console_Games
 
         private void playGame()
         {
+            this.totalGames++;
+
             bool turn = true;
+
             while (!this.isBoardFull())
             {
-                if (turn)
-                {
-                    Point spot = player1.makeMove();
-                }
-                else
-                {
-
-                }
-
+                //alternate between player 1 and 2
+                TicTacToePlayer cur = turn ? this.player1 : this.player2;
+                char piece = turn ? p1Piece : p2Piece;
                 turn = !turn;
+
+                Point spot;
+                bool wrong = false;
+                while (true) {
+                    spot = cur.makeMove(piece, wrong);
+                    if (spot.X < 1 || spot.X > this.size || spot.Y < 1 || spot.Y > this.size)
+                    {
+                        wrong = true;
+                        continue;
+                    }
+
+                    spot.X--;
+                    spot.Y--;
+
+                    if (this.board[(int)spot.X, (int)spot.Y] == empty)
+                        break;
+                    wrong = true;
+                }
+
+                this.board[(int)spot.X, (int)spot.Y] = piece;
+
+                //current player won
+                if (this.checkWin())
+                {
+                    cur.playerWin();
+                    return;
+                }
             }
+
+            //shouldn't be in this class
+            //TODO: remove
+            Console.WriteLine("TIE?!?!?!?!");
+            Console.ReadLine();
         }
 
         /// <summary>
