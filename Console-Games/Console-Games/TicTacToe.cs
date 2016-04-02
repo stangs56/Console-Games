@@ -226,13 +226,13 @@ namespace Console_Games
                     }
 
                     //check if on second diagonal
-                    if (y == (this.size - x))
+                    if (y == (this.size - x - 1))
                     {
                         win = true;
 
                         for (int i = 0; i < size; i++)
                         {
-                            if (this.board[i, this.size - i] != cur)
+                            if (this.board[i, this.size - i - 1] != cur)
                                 win = false;
                         }
 
