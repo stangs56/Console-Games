@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Console_Games
 {
-    class Battleship
+    class Battleship : Game
     {
+        protected override void playGame()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

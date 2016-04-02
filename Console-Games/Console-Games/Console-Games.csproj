@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AITicTacToePlayer.cs" />
     <Compile Include="Battleship.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="HumanTicTacToePlayer.cs" />
     <Compile Include="TicTacToePlayer.cs" />
     <Compile Include="Program.cs" />

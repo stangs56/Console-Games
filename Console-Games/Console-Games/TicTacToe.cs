@@ -7,19 +7,13 @@ using System.Windows;
 
 namespace Console_Games
 {
-    class TicTacToe
+    class TicTacToe : Game
     {
         private const char empty = ' ', p1Piece = 'X', p2Piece = 'O';
 
         private TicTacToePlayer player1, player2;
         private char[,] board;
         private int size;
-
-        public int totalGames
-        {
-            private set;
-            get;
-        }
 
         public TicTacToe(TicTacToePlayer player1, TicTacToePlayer player2, int size = 3)
         {
@@ -45,17 +39,6 @@ namespace Console_Games
                 {
                     this.board[x, y] = empty;
                 }
-            }
-        }
-
-        public void playGames(int numGames = 1)
-        {
-            if (numGames <= 0)
-                throw new ArgumentOutOfRangeException("numGames should be greater than 0");
-
-            for(int i = 0; i < numGames; i++)
-            {
-                this.playGame();
             }
         }
 
@@ -99,7 +82,7 @@ namespace Console_Games
             }
         }
 
-        private void playGame()
+        protected override void playGame()
         {
             this.totalGames++;
 
