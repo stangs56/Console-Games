@@ -7,8 +7,17 @@ using System.Windows;
 
 namespace Console_Games
 {
+    enum AISkill
+    {
+        novice,
+        intermediate,
+        experienced,
+        expert
+    }
+
     class AITicTacToePlayer : TicTacToePlayer
     {
+        
 
         public override Point makeMove(char piece, bool wrongLastMove)
         {
