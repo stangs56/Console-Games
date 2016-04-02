@@ -208,9 +208,9 @@ namespace Console_Games
                     if (win)
                         return true;
 
-                    //check diagonal
+                    //check diagonals
 
-                    //only check if on a diagonal
+                    //check if on first diagonal
                     if (x == y)
                     {
                         win = true;
@@ -218,6 +218,21 @@ namespace Console_Games
                         for (int i = 0; i < size; i++)
                         {
                             if (this.board[i, i] != cur)
+                                win = false;
+                        }
+
+                        if (win)
+                            return true;
+                    }
+
+                    //check if on second diagonal
+                    if (y == (this.size - x))
+                    {
+                        win = true;
+
+                        for (int i = 0; i < size; i++)
+                        {
+                            if (this.board[i, this.size - i] != cur)
                                 win = false;
                         }
 
