@@ -10,17 +10,9 @@ namespace Console_Games
     {
         static void Main(string[] args)
         {
-            int boardSize;
-
-            do
-            {
-                Console.Write("Enter Board Size: ");
-            } while (int.TryParse(Console.ReadLine(), out boardSize) && boardSize < 0);
-
-            TicTacToePlayer p1 = new HumanTicTacToePlayer(), p2 = new HumanTicTacToePlayer();
-            TicTacToe game = new TicTacToe(p1, p2, boardSize);
-            game.playGames();
-            Console.ReadLine();
+            MainMenu menu = new MainMenu();
+            menu.show();
+            
         }
     }
 }

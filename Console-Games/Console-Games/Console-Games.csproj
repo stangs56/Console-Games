@@ -47,6 +47,7 @@
     <Compile Include="AITicTacToePlayer.cs" />
     <Compile Include="Battleship.cs" />
     <Compile Include="HumanTicTacToePlayer.cs" />
+    <Compile Include="MainMenu.cs" />
     <Compile Include="TicTacToePlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
